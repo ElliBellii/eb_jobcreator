@@ -7,7 +7,7 @@ A job creator built within the context menu from overextended for a clean design
 
 **Showcase**
 
-[Job Creator]([my_link_here](https://www.youtube.com/watch?v=vS08SwL2mIs&ab_channel=ElliBelli%21))
+[Job Creator]([my_link_here](https://www.youtube.com/watch?v=vS08SwL2mIs&ab_channel=ElliBelli%21)
 
 **Installation**
 

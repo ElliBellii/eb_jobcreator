@@ -22,5 +22,3 @@ Start the script and you are good to go. (Make sure to install all requirements)
 **Requirements**
 
 * [ox_lib](https://github.com/overextended/ox_lib/releases/)
-
-**Note:** If you find any errors or have some ideas for the script, please let me know.

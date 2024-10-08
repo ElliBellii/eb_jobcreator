@@ -85,7 +85,6 @@ AddEventHandler('eb_jobcreator:jobGradesMenu', function(name, label)
 
                 if alert == 'confirm' then
                     TriggerServerEvent('eb_jobcreator:deleteJob', name, label)
-                    lib.showContext('eb_jobcreator:mainMenu')
                 else
                     lib.showContext('eb_jobcreator:jobGradesMenu')
                 end
@@ -144,7 +143,6 @@ AddEventHandler('eb_jobcreator:jobGradesMenu', function(name, label)
         
                         if alert == 'confirm' then
                             TriggerServerEvent('eb_jobcreator:deleteGrade', name, v.number)
-                            lib.showContext('eb_jobcreator:mainMenu')
                         else
                             lib.showContext('eb_jobcreator:jobGradesMenu')
                         end
@@ -155,7 +153,6 @@ AddEventHandler('eb_jobcreator:jobGradesMenu', function(name, label)
                             salary = input[3],
                         }
                         TriggerServerEvent('eb_jobcreator:updateGrade', name, v.number, gradeData)
-                        lib.showContext('eb_jobcreator:mainMenu')
                     end
                 end,
             })
@@ -184,7 +181,7 @@ AddEventHandler('eb_jobcreator:addJob', function()
             {value = 0, label = 'Nej'},
             {value = 1, label = 'Ja'},
         }},
-        {type = 'number', label = 'Antal Grades', required = true},
+        {type = 'number', label = 'Antal Grades', min = 1, required = true},
     })
     if not input then lib.showContext('eb_jobcreator:mainMenu') return end
 
@@ -194,8 +191,6 @@ AddEventHandler('eb_jobcreator:addJob', function()
         whitelisted = input[3],
         grades = input[4],
     }
-
-    if jobData.grades < 1 then print('Antal grades skal være mindst 1') return end
 
     local gradeData = {}
     local gradeCount = 0
@@ -218,5 +213,4 @@ AddEventHandler('eb_jobcreator:addJob', function()
     until gradeCount == jobData.grades
 
     TriggerServerEvent('eb_jobcreator:createJob', jobData, gradeData)
-    lib.showContext('eb_jobcreator:mainMenu')
 end)

@@ -81,7 +81,6 @@ end)
 RegisterNetEvent('eb_jobcreator:addGrade', function(name, gradeData) 
     local xPlayer = ESX.GetPlayerFromId(source)
     local group = xPlayer.getGroup()
-    local nameExists = MySQL.Sync.fetchScalar('SELECT name FROM job_grades WHERE name = ? AND job_name = ?', {gradeData.name, name})
     local gradeExists = MySQL.Sync.fetchScalar('SELECT grade FROM job_grades WHERE grade = ? AND job_name = ?', {gradeData.number, name})
 
     if not xPlayer then
@@ -103,11 +102,6 @@ RegisterNetEvent('eb_jobcreator:addGrade', function(name, gradeData)
         
             DiscordLog(message)
         end
-        return
-    end
-
-    if nameExists then
-        Notify(source, 'Grade navn findes allerede! ', 'inform')
         return
     end
 

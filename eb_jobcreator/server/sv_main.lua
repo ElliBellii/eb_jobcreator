@@ -75,6 +75,7 @@ RegisterNetEvent('eb_jobcreator:deleteJob', function(name, label)
 
     MySQL.Async.execute('DELETE FROM jobs WHERE name = ?', {name})
     MySQL.Async.execute('DELETE FROM job_grades WHERE job_name = ?', {name})
+    ESX.RefreshJobs()
     Notify(source, label .. ' blev slettet fra serveren', 'inform')
 end)  
 
@@ -111,6 +112,7 @@ RegisterNetEvent('eb_jobcreator:addGrade', function(name, gradeData)
     end
 
     MySQL.Async.insert('INSERT INTO job_grades (job_name, grade, name, label, salary) VALUES (?, ?, ?, ?, ?)', {name, gradeData.number, gradeData.name, gradeData.label, gradeData.salary})
+    ESX.RefreshJobs()
     Notify(source, gradeData.label .. ' blev tilføjet', 'inform')
 end)
 
@@ -142,6 +144,7 @@ RegisterNetEvent('eb_jobcreator:deleteGrade', function(name, number)
     end
 
     MySQL.Async.execute('DELETE FROM job_grades WHERE job_name = ? AND grade = ?', {name, number})
+    ESX.RefreshJobs()
     Notify(source, 'Grade ' .. number .. ' blev slettet fra serveren', 'inform')
 end)
 
@@ -175,6 +178,7 @@ RegisterNetEvent('eb_jobcreator:updateGrade', function(name, number, gradeData)
     end
 
     MySQL.Async.execute('UPDATE job_grades SET label = ?, name = ?, salary = ? WHERE job_name = ? AND grade = ?', {gradeData.label, gradeData.name, gradeData.salary, name, number})
+    ESX.RefreshJobs()
     Notify(source, gradeData.label .. ' blev opdateret', 'inform')
 end)  
 
@@ -214,6 +218,7 @@ RegisterNetEvent('eb_jobcreator:createJob', function(jobData, gradeData)
     for _,v in pairs(gradeData) do
         MySQL.Async.insert('INSERT INTO job_grades (job_name, grade, name, label, salary) VALUES (?, ?, ?, ?, ?)', {jobData.name, v.number, v.name, v.label, v.salary})
     end
+    ESX.RefreshJobs()
     Notify(source, 'Du tilføjede ' .. jobData.label .. ' med ' .. #gradeData .. ' grade(s)', 'inform')
 end)
 
